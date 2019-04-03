@@ -12,17 +12,19 @@ console.log('timestamp', id.getTimestamp());
 MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) => {
     if (error) { return console.log(error); }
     console.log('Connected correctly');
+
     const db = client.db(databaseName);
-    db.collection('users').insertOne({
-        _id: id,
-        name: 'Aditya Kapoor',
-        age: 24
-    }, (error, result) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log(result.ops);
-    });
+    //CREATE
+    // db.collection('users').insertOne({
+    //     _id: id,
+    //     name: 'Aditya Kapoor',
+    //     age: 24
+    // }, (error, result) => {
+    //     if (error) {
+    //         return console.log(error);
+    //     }
+    //     console.log(result.ops);
+    // });
 
     // db.collection('users').insertMany([
     //     {
@@ -55,4 +57,24 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) =>
     //     }
     //     console.log(result.ops);
     // });
-})
+
+    //READ
+    db.collection('users').findOne({ name: 'Mohd Shad Mirza' }, (error, user) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(user);
+    });
+    db.collection('users').findOne({ _id: new ObjectID("5ca411d7effa2205f09667b6") }, (error, user) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(user);
+    });
+    db.collection('users').find({ age: 23 }).toArray((error, users) => {
+        console.log(users);
+    });
+    db.collection('users').find({ age: 23 }).count((error, count) => {
+        console.log(count);
+    });
+});
