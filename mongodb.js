@@ -59,22 +59,47 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) =>
     // });
 
     //READ
-    db.collection('users').findOne({ name: 'Mohd Shad Mirza' }, (error, user) => {
-        if (error) {
+    // db.collection('users').findOne({ name: 'Mohd Shad Mirza' }, (error, user) => {
+    //     if (error) {
+    //         console.log(error);
+    //     }
+    //     console.log(user);
+    // });
+    // db.collection('users').findOne({ _id: new ObjectID("5ca411d7effa2205f09667b6") }, (error, user) => {
+    //     if (error) {
+    //         console.log(error);
+    //     }
+    //     console.log(user);
+    // });
+    // db.collection('users').find({ age: 23 }).toArray((error, users) => {
+    //     console.log(users);
+    // });
+    // db.collection('users').find({ age: 23 }).count((error, count) => {
+    //     console.log(count);
+    // });
+
+    //UPDATE
+    db.collection('users').updateOne({
+        _id: new ObjectID("5ca411d7effa2205f09667b5")
+    }, {
+            $set: {
+                name: 'Shweta'
+            }
+        }).then((result) => {
+            console.log('result update', result);
+        }).catch((error) => {
             console.log(error);
-        }
-        console.log(user);
-    });
-    db.collection('users').findOne({ _id: new ObjectID("5ca411d7effa2205f09667b6") }, (error, user) => {
-        if (error) {
+        });
+
+    db.collection('users').updateOne({
+        _id: new ObjectID("5ca411d7effa2205f09667b5")
+    }, {
+            $inc: {
+                age: -1
+            }
+        }).then((result) => {
+            console.log('result update', result);
+        }).catch((error) => {
             console.log(error);
-        }
-        console.log(user);
-    });
-    db.collection('users').find({ age: 23 }).toArray((error, users) => {
-        console.log(users);
-    });
-    db.collection('users').find({ age: 23 }).count((error, count) => {
-        console.log(count);
-    });
+        });
 });
