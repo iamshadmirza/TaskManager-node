@@ -103,13 +103,22 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) =>
     //         console.log(error);
     //     });
 
-    db.collection('tasks').updateMany({
-        completed: false
-    }, {
-            $set: {
-                completed: true
-            }
-        }).then((result) => {
-            console.log('result update', result);
-        }).catch(error => console.log(error));
+    // db.collection('tasks').updateMany({
+    //     completed: false
+    // }, {
+    //         $set: {
+    //             completed: true
+    //         }
+    //     }).then((result) => {
+    //         console.log('result update', result);
+    //     }).catch(error => console.log(error));
+
+    //DELETE
+    db.collection('users').deleteMany({ age: 23 })
+        .then(result => console.log(result))
+        .catch(error => console.log(error));
+
+    db.collection('tasks').deleteOne({ description: 'Learning Crud' })
+        .then(result => console.log(result))
+        .catch(error => console.log(error));
 });
