@@ -79,27 +79,37 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) =>
     // });
 
     //UPDATE
-    db.collection('users').updateOne({
-        _id: new ObjectID("5ca411d7effa2205f09667b5")
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID("5ca411d7effa2205f09667b5")
+    // }, {
+    //         $set: {
+    //             name: 'Shweta'
+    //         }
+    //     }).then((result) => {
+    //         console.log('result update', result);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID("5ca411d7effa2205f09667b5")
+    // }, {
+    //         $inc: {
+    //             age: -1
+    //         }
+    //     }).then((result) => {
+    //         console.log('result update', result);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+
+    db.collection('tasks').updateMany({
+        completed: false
     }, {
             $set: {
-                name: 'Shweta'
+                completed: true
             }
         }).then((result) => {
             console.log('result update', result);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-    db.collection('users').updateOne({
-        _id: new ObjectID("5ca411d7effa2205f09667b5")
-    }, {
-            $inc: {
-                age: -1
-            }
-        }).then((result) => {
-            console.log('result update', result);
-        }).catch((error) => {
-            console.log(error);
-        });
+        }).catch(error => console.log(error));
 });
