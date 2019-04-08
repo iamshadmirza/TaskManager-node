@@ -95,7 +95,7 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) =>
         _id: new ObjectID("5ca411d7effa2205f09667b5")
     }, {
             $inc: {
-                age: -1
+                age: 10 //increment
             }
         }).then((result) => {
             console.log('result update', result);
