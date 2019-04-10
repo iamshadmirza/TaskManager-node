@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.5",
     "express": "^4.16.4",
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.21",
