@@ -1,9 +1,25 @@
 const express = require('express');
 const router = new express.Router();
 const Tasks = require('../models/tasks');
+const auth = require('../middleware/auth');
+
+//create task
+router.post('/tasks', auth, async (req, res) => {
+    //const task = new Tasks(req.body);
+    const task = new Tasks({
+        ...req.body,
+        owner: req.user._id
+    });
+    try {
+        await task.save()
+        res.status(201).send(task);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
 
 //read task
-router.get('/tasks', async (req, res) => {
+router.get('/tasks', auth, async (req, res) => {
     try {
         const tasks = await Tasks.find({});
         res.send(tasks);
@@ -22,17 +38,6 @@ router.get('/tasks/:id', async (req, res) => {
         res.send(task);
     } catch (error) {
         res.status(500).send(error)
-    }
-});
-
-//create task
-router.post('/tasks', async (req, res) => {
-    const task = new Tasks(req.body);
-    try {
-        await task.save()
-        res.status(201).send(task);
-    } catch (error) {
-        res.status(400).send(error);
     }
 });
 
