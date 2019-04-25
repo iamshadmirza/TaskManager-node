@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 require('./db/mongoose');
 
-const userRouter = require('./routers/user');
+const userRouter = require('./routers/users');
 const taskRouter = require('./routers/tasks');
 
 const port = process.env.PORT || 3000;
@@ -19,11 +19,11 @@ app.listen(port, () => {
     console.log('Server is up on port ', port);
 });
 
-const Tasks = require('./models/tasks');
+const Task = require('./models/tasks');
 const User = require('./models/users');
 
 const main = async () => {
-    // const task = await Tasks.findById('give_one_id_here');
+    // const task = await Task.findById('give_one_id_here');
     // await task.populate('owner').execPopulate();
     // console.log(task.owner);
 
