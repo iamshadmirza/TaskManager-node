@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Tasks = require('./tasks');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -83,7 +84,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user;
 }
 
-//match the password
+//hash the password
 userSchema.pre('save', async function (next) {
     const user = this;
     if (user.isModified('password')) {
@@ -91,6 +92,13 @@ userSchema.pre('save', async function (next) {
     }
     next();
 });
+
+//delete all tasks when user is deleted
+userSchema.pre('remove', async function (next) {
+    const user = this;
+    await Tasks.deleteMany({ owner: user._id });
+    next();
+})
 
 const User = mongoose.model('User', userSchema);
 
