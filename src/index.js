@@ -5,7 +5,7 @@ require('./db/mongoose');
 const userRouter = require('./routers/users');
 const taskRouter = require('./routers/tasks');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // app.use((req, res, next) => {
 //     res.status(503).send('Site is currently down check back soon');
