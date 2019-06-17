@@ -1,5 +1,5 @@
 //CRUD Create Read Update Delete
-
+//It's a started file, not included in main project
 const { MongoClient, ObjectID } = require('mongodb');
 
 const connectionUrl = 'mongodb://127.0.0.1:27017';
