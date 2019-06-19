@@ -10,7 +10,7 @@ const userOne = {
     name: 'Urooj',
     email: 'urooj@test.com',
     age: 23,
-    password: 'BabyMartinSch00l',
+    password: 'BabyMartinSch00l!!',
     tokens: [{
         token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
     }]
