@@ -24,7 +24,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken();
         res.send({ user, token });
     } catch (error) {
-        res.status(400).send();
+        res.status(400).send(error);
     }
 });
 
@@ -37,7 +37,7 @@ router.post('/users/logout', auth, async (req, res) => {
         await req.user.save();
         res.send();
     } catch (error) {
-        res.status(500).send();
+        res.status(500).send(error);
     }
 });
 
@@ -48,7 +48,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
         await req.user.save();
         res.send();
     } catch (error) {
-        res.status(500).send();
+        res.status(500).send(error);
     }
 });
 
@@ -121,7 +121,7 @@ router.get('/users/me/avatar', auth, async (req, res) => {
         res.set('Content-Type', 'image/png');
         res.send(user.avatar);
     } catch (error) {
-        res.status(404).send();
+        res.status(404).send(error);
     }
 })
 
