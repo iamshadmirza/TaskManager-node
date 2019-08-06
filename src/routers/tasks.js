@@ -100,4 +100,21 @@ router.delete('/tasks/:id', auth, async (req, res) => {
     }
 });
 
+//sync tasks
+router.post('/tasks/sync', auth, async (req, res) => {
+    const task = await Task.deleteMany({ owner: req.user._id });
+    if (!task) {
+        return res.status(404).send();
+    }
+    req.body.map((task) => {
+        task.owner = req.user._id
+    });
+    Task.create(...req.body, (err) => {
+        if (!err) {
+            res.status(201).send({ message: "success" });
+        } else {
+            res.status(400).send(err);
+        }
+    });
+});
 module.exports = router;
